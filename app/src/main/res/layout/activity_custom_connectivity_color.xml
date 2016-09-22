@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.beltaief.flowlayout.FlowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/reveLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:isConnectivityAware="true"
+    app:connectedText="@string/connected_message"
+    app:connectedTextColor="@color/white"
+    app:connectedBackground="@color/blue_light"
+    app:disconnectedBackground="@color/colorAccent"
+    app:emptyLayout="@layout/custom_empty"
+    tools:context="CustomConnectivityColorActivity">
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</com.beltaief.flowlayout.FlowLayout>

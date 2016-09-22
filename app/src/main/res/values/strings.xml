@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FlowLayout Example</string>
+    <string name="emptyText">This is an empty screen !!</string>
+    <string name="connected_message">now you\'re connected</string>
+</resources>
