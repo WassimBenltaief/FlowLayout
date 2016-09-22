@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FlowLayout">
+
+        <attr name="isConnectivityAware" format="boolean" />
+
+        <attr name="connectedText" format="reference" />
+        <attr name="connectedTextColor" format="reference" />
+        <attr name="connectedBackground" format="reference" />
+
+        <attr name="disconnectedText" format="reference" />
+        <attr name="disconnectedTextColor" format="reference" />
+        <attr name="disconnectedBackground" format="reference" />
+
+        <attr name="errorText" format="reference" />
+
+        <attr name="emptyLayout" format="reference" />
+        <attr name="emptyText" format="reference" />
+        <attr name="emptyTextColor" format="reference" />
+
+    </declare-styleable>
+</resources>

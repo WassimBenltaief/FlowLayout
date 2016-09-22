@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <RelativeLayout
+        android:clickable="false"
+        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:gravity="center"
+        android:id="@+id/emptyView">
+
+        <TextView
+            android:id="@+id/text_empty"
+            android:textColor="@color/text_empty_color"
+            android:text="@string/text_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:clickable="false"
+        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/progress_view">
+
+        <ProgressBar
+            android:indeterminate="true"
+            style="@style/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/progressBar" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:clickable="false"
+        android:focusable="true"
+        android:id="@+id/connectivity"
+        android:visibility="gone"
+        android:background="@color/connected_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:text="@string/text_connected"
+            android:gravity="center"
+            android:padding="6dp"
+            android:textColor="@color/connectivity_color"
+            android:id="@+id/connectivity_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+
+</merge>

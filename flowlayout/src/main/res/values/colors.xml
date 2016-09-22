@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="connected_color">#d0127b00</color>
+    <color name="disconnected_color">#d3940700</color>
+    <color name="connectivity_color">#ffffff</color>
+    <color name="text_error_color">#3d3d3d</color>
+    <color name="text_empty_color">#3d3d3d</color>
+</resources>

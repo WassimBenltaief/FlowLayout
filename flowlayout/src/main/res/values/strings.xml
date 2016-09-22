@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">FlowLayout</string>
+    <string name="text_connected">Connected</string>
+    <string name="text_disconnected">No internet</string>
+    <string name="text_error">An error occured !</string>
+    <string name="text_empty">Nothing found here !</string>
+</resources>
