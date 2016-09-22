@@ -346,7 +346,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
     }
 
     /**
-     *
+     * set the text color to display in the empty view
      * @param mEmptyTextColor an id representing the color resource.
      */
     public void setEmptyTextColor(int mEmptyTextColor) {
@@ -354,16 +354,26 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
         inflateEmptyTextColor();
     }
 
+    /**
+     * @return the connectivity status : true if connected, false otherwise.
+     */
     public boolean isConnected() {
         return isConnected;
     }
 
+    /**
+     * the callback called by the broadcast receiver when a connectivity status change is detected
+     * @param status
+     */
     @Override
     public void onChanged(boolean status) {
         isConnected = status;
         inflateConnectivity();
     }
 
+    /**
+     * check connectivity and inflate connectivity view accordingly
+     */
     private void inflateConnectivity() {
         if (isConnected) {
             if (connectivityView.getVisibility() == VISIBLE) {
@@ -374,6 +384,9 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
         }
     }
 
+    /**
+     * show connectivity view in disconnected mode.
+     */
     private void showDisconnected() {
         connectivityView.setBackgroundColor(
                 ContextCompat.getColor(mContext, mDisconnectedBackground));
@@ -390,6 +403,9 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
         }
     }
 
+    /**
+     * show connectivity view in connected mode.
+     */
     private void showConnected() {
         connectivityView.setBackgroundColor(
                 ContextCompat.getColor(mContext, mConnectedBackground));
@@ -410,6 +426,20 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
         }, 2000);
     }
 
+    /**
+     * set the mode of the custom view.
+     * This is called usually from the activity/fragment to change the status of the view
+     * Example:
+     *  // before loading data :
+     *  flowLayout.setMode(FlowLayout.Mode.PROGRESS);
+     *
+     *  // if data is loaded correctly and is not empty
+     *  flowLayout.setMode(FlowLayout.Mode.CONTENT);
+     *
+     *  // otherwise
+     *  flowLayout.setMode(FlowLayout.Mode.EMPTY);
+     *
+     */
     public void setMode(MODE mode) {
         switch (mode) {
             case PROGRESS:
@@ -430,20 +460,28 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
         }
     }
 
+    /**
+     * Set the content view visibility
+     * @param visibility
+     */
     private void setContent(int visibility) {
         contentView.setVisibility(visibility);
     }
 
+    /**
+     * Set the empty view visibility
+     * @param visibility
+     */
     private void setEmpty(int visibility) {
         emptyView.setVisibility(visibility);
     }
 
+    /**
+     * Set the progress view visibility
+     * @param visibility
+     */
     private void setProgress(int visibility) {
         progressView.setVisibility(visibility);
     }
 
-    private void inflateView(RelativeLayout view, int layoutId) {
-        view.removeAllViewsInLayout();
-        LayoutInflater.from(mContext).inflate(layoutId, view);
-    }
 }
