@@ -1,6 +1,14 @@
 # FlowLayout
 A custom Layout able to display content, empty view, progress bar and network connectivity status.
 
+1. [Why this layout](https://github.com/WassimBenltaief/FlowLayout#why-this-layout)
+2. [How](https://github.com/WassimBenltaief/FlowLayout#how)
+3. [Connectivity Awareness](https://github.com/WassimBenltaief/FlowLayout#connectivity-awareness)
+4. [Customize connectivity view](https://github.com/WassimBenltaief/FlowLayout#customize-connectivity)
+5. [Customize empty view](https://github.com/WassimBenltaief/FlowLayout#custom-empty-view)
+6. [PR](https://github.com/WassimBenltaief/FlowLayout#pr)
+7. [TODOS](https://github.com/WassimBenltaief/FlowLayout#todos)
+
 #Why this layout
 A very common flow of an android view is :
 - show a progress bar while fetching data from a remote service.
@@ -138,7 +146,7 @@ flowLayout.setDisconnectedTextColor(R.color.disconnected_color);
 
 ![](https://github.com/WassimBenltaief/FlowLayout/blob/master/images/custom_connectivity.gif)
 
-# Custom Empty View
+# Customize Empty View
 There's two ways to customize the empty view :
 
 1. custom text and color :
