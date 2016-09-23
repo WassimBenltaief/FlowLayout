@@ -6,7 +6,6 @@ import android.content.IntentFilter;
 import android.content.res.TypedArray;
 import android.net.ConnectivityManager;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +14,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.beltaief.flowlayout.util.ColorUtil;
 import com.beltaief.flowlayout.util.ConnectivityListener;
 import com.beltaief.flowlayout.util.NetworkReceiver;
 import com.beltaief.flowlayout.util.NetworkUtil;
@@ -176,7 +176,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
      */
     private void inflateConnectedBackground() {
         if (mConnectedBackground != R.color.connected_color) {
-            connectivityView.setBackgroundColor(ContextCompat.getColor(mContext, mConnectedBackground));
+            connectivityView.setBackgroundColor(ColorUtil.getColorWrapper(mContext, mConnectedBackground));
         }
     }
 
@@ -185,7 +185,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
      */
     private void inflateConnectedTextColor() {
         if (mConnectedTextColor != R.color.connectivity_color) {
-            connectivityText.setTextColor(ContextCompat.getColor(mContext, mConnectedTextColor));
+            connectivityText.setTextColor(ColorUtil.getColorWrapper(mContext, mConnectedTextColor));
         }
     }
 
@@ -208,7 +208,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
                         "You already overridden the entire empty view, no need to specify " +
                         "custom color or custom text message");
             } else {
-                textEmpty.setTextColor(ContextCompat.getColor(mContext, mEmptyTextColor));
+                textEmpty.setTextColor(ColorUtil.getColorWrapper(mContext, mEmptyTextColor));
             }
         }
     }
@@ -389,9 +389,9 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
      */
     private void showDisconnected() {
         connectivityView.setBackgroundColor(
-                ContextCompat.getColor(mContext, mDisconnectedBackground));
+                ColorUtil.getColorWrapper(mContext, mDisconnectedBackground));
         connectivityText.setTextColor(
-                ContextCompat.getColor(mContext, mDisconnectedTextColor));
+                ColorUtil.getColorWrapper(mContext, mDisconnectedTextColor));
         connectivityText.setText(getResources().getString(mDisconnectedText));
 
         if (connectivityView.getVisibility() == GONE) {
@@ -408,9 +408,9 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
      */
     private void showConnected() {
         connectivityView.setBackgroundColor(
-                ContextCompat.getColor(mContext, mConnectedBackground));
+                ColorUtil.getColorWrapper(mContext, mConnectedBackground));
         connectivityText.setTextColor(
-                ContextCompat.getColor(mContext, mConnectedTextColor));
+                ColorUtil.getColorWrapper(mContext, mConnectedTextColor));
         connectivityText.setText(getResources().getString(mConnectedText));
 
         connectivityText.postDelayed(new Runnable() {

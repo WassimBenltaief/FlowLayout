@@ -54,7 +54,7 @@ public class ContentActivity extends AppCompatActivity {
             public void run() {
                 setData(items);
             }
-        }, 2000);
+        }, 3000);
     }
 
     private void setData(List<String> items) {
