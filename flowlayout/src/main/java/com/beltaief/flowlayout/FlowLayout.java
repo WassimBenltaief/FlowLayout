@@ -44,6 +44,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
 
     private int mDisconnectedText = R.string.text_disconnected;
     private int mDisconnectedTextColor = R.color.connectivity_color;
+
     private int mDisconnectedBackground = R.color.disconnected_color;
 
     // error
@@ -301,6 +302,22 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
         this.mConnectedText = mConnectedText;
     }
 
+
+    /**
+     * Set the the background color of the disconnected view
+     * @param mDisconnectedBackground
+     */
+    public void setDisconnectedBackground(int mDisconnectedBackground) {
+        this.mDisconnectedBackground = mDisconnectedBackground;
+    }
+
+    /**
+     * Set the the background color of the connected view
+     * @param mConnectedBackground
+     */
+    public void setConnectedBackground(int mConnectedBackground) {
+        this.mConnectedBackground = mConnectedBackground;
+    }
 
     /**
      * Set the text color to appear on the connectivity view when phone turn connected.
