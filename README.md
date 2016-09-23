@@ -5,7 +5,7 @@ A custom Layout able to display content, empty view, progress bar and network co
 2. [How](https://github.com/WassimBenltaief/FlowLayout#how)
 3. [Connectivity Awareness](https://github.com/WassimBenltaief/FlowLayout#connectivity-awareness)
 4. [Customize connectivity view](https://github.com/WassimBenltaief/FlowLayout#customize-connectivity)
-5. [Customize empty view](#custom-empty-view)
+5. [Customize empty view](https://github.com/WassimBenltaief/FlowLayout#custom-empty-view)
 6. [PR](https://github.com/WassimBenltaief/FlowLayout#pr)
 7. [TODOS](https://github.com/WassimBenltaief/FlowLayout#todos)
 
