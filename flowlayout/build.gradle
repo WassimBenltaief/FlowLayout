@@ -39,7 +39,7 @@ ext {
     gitUrl = 'https://github.com/WassimBenltaief/FlowLayout.git'
     githubRepository= 'WassimBenltaief/FlowLayout'
 
-    libraryVersion = '0.1.0'
+    libraryVersion = '0.1.1'
 
     developerId = 'wassimbenltaief'
     developerName = 'Wassim Beltaief'
