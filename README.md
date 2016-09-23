@@ -22,7 +22,7 @@ FlowLayout do all of this for you with a very few code in a customized way.
 #Download
 
 ```groovy
-compile 'com.beltaief.flowlayout:flowlayout:0.1.0'
+compile 'com.beltaief.flowlayout:flowlayout:0.1.1'
 ```
 
 #How
@@ -144,9 +144,11 @@ flowLayout.setConnectivityAware(true);
 
 flowLayout.setConnectedText(R.string.connected_message);
 flowLayout.setConnectedTextColor(R.color.connected_color);
+flowLayout.setConnectedBackground(R.color.connected_color);
 
 flowLayout.setDisconnectedText(R.string.text_disconnected);
 flowLayout.setDisconnectedTextColor(R.color.disconnected_color);
+flowLayout.setDisconnectedBackground(R.color.disconnected_color);
 
 ```
 
