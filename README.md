@@ -86,33 +86,13 @@ Add attributes to your xml to apply customization :
 
 ```xml
 app:isConnectivityAware="true" // true, false
-```
-```xml
 app:connectedText="@string/connectedTextStringResource" // text to show when connected
-```
-```xml
 app:connectedTextColor="@color/connectedTextColorResource" // text color
-```
-```xml
 app:connectedBackground="@color/connectedBackgroundColorResource" // background color
-```
-```xml
 app:disconnectedText="@string/disconnectedTextStringResource" // text to show when disconnected
-```
-```xml
 app:disconnectedTextColor="@color/disconnectedTextColorResource" // text color
-```
-```xml
 app:disconnectedBackground="@color/disconnectedBackgroundColorResource" // background color
-```
-```xml
 app:emptyLayout="@layout/emptyLayoutReference" // custom empty view layout
-```
-```xml
-app:emptyText="@string/emptyTextStringResource" // custom empty text (do not combine with "emptyLayout")
-```
-```xml
-app:emptyTextColor="@color/emptyTextColorResource" // custom empty text color (do not combine with "emptyLayout")
 ```
 
 ### Example :
