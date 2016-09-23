@@ -3,16 +3,16 @@ A custom Layout able to display content, empty view, progress bar and network co
 
 #Why this layout
 A very common flow of an android view is :
-- displaying a progress bar while fetching data, from remote service for example
-- checking if the resut is null : show an empty view with a custom message.
-- If not : show the content and hide the progressbar
+- show a progress bar while fetching data from a remote service.
+- if the resut is empty : show an empty view with a custom message and hide the progressbar.
+- If not : show the content and hide the progressbar.
 - showing a notification when phone is not connected or when action requires internet connection.
 
 FlowLayout do all of this for you with a very few code in a customized way.
 
 #How
 
-FlowLayout extends a relative layout. So add it to your view as a regular RelativeLayout :
+FlowLayout extends a RelativeLayout. So add it to your view as a regular RelativeLayout :
 
 in your ```activity_layout.xml``` :
 
@@ -171,3 +171,35 @@ flowLayout.setEmptyLayout(R.layout.layout_empty);
 
 ### Screenshot
 ![](https://github.com/WassimBenltaief/FlowLayout/blob/master/images/custom_empty.gif)
+
+
+# PR
+Open.
+
+# TODOS
+
+- add customization to progress-bar
+- add error view handling
+- any other idea is welcome
+
+#Licence
+The MIT License (MIT)
+
+Copyright (c) 2014 Neil Stoker
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
