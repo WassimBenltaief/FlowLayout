@@ -65,9 +65,9 @@ protected void onCreate(Bundle savedInstanceState) {
 
 [empty]: https://github.com/WassimBenltaief/FlowLayout/blob/master/images/empty_example.gif
 
-|               | progress then content       | progress then empty         |   
-| ------------- |:-------------:|:-------------:|
-| Screenshot    | ![][content]  | ![][empty]    |
+| content mode  | empty mode    |   
+|:-------------:|:-------------:|
+| ![][content]  | ![][empty]    |
 
 
 #Connectivity awareness
