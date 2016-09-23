@@ -2,12 +2,13 @@
 A custom Layout able to display content, empty view, progress bar and network connectivity status.
 
 1. [Why this layout](https://github.com/WassimBenltaief/FlowLayout#why-this-layout)
-2. [How](https://github.com/WassimBenltaief/FlowLayout#how)
-3. [Connectivity Awareness](https://github.com/WassimBenltaief/FlowLayout#connectivity-awareness)
-4. [Customize connectivity view](https://github.com/WassimBenltaief/FlowLayout#customize-connectivity)
-5. [Customize empty view](https://github.com/WassimBenltaief/FlowLayout#customize-empty-view)
-6. [PR](https://github.com/WassimBenltaief/FlowLayout#pr)
-7. [TODOS](https://github.com/WassimBenltaief/FlowLayout#todos)
+2. [Download](https://github.com/WassimBenltaief/FlowLayout#download)
+3. [How](https://github.com/WassimBenltaief/FlowLayout#how)
+4. [Connectivity Awareness](https://github.com/WassimBenltaief/FlowLayout#connectivity-awareness)
+5. [Customize connectivity view](https://github.com/WassimBenltaief/FlowLayout#customize-connectivity)
+6. [Customize empty view](https://github.com/WassimBenltaief/FlowLayout#customize-empty-view)
+7. [PR](https://github.com/WassimBenltaief/FlowLayout#pr)
+8. [TODOS](https://github.com/WassimBenltaief/FlowLayout#todos)
 
 #Why this layout
 A very common flow of an android view is :
@@ -17,6 +18,12 @@ A very common flow of an android view is :
 - showing a notification when phone is not connected or when action requires internet connection.
 
 FlowLayout do all of this for you with a very few code in a customized way.
+
+#Download
+
+```groovy
+compile 'com.beltaief.flowlayout:flowlayout:0.1.0'
+```
 
 #How
 
