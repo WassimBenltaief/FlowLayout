@@ -58,7 +58,8 @@ protected void onCreate(Bundle savedInstanceState) {
       flowLayout.setMode(FlowLayout.MODE.EMPTY);
     } else {
       flowLayout.setMode(FlowLayout.MODE.CONTENT);
-      doSomethingWithTheData(data);
+      // show the data in the view
+      ...
     }
 }
 ```
