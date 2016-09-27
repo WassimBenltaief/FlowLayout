@@ -1,10 +1,11 @@
 package com.beltaief.flowlayoutexample;
 
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+
 import com.beltaief.flowlayout.FlowLayout;
 
 import java.util.ArrayList;
@@ -13,14 +14,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by wassim on 9/22/16.
- */
+public class CustomProgressActivity extends AppCompatActivity {
 
-public class ContentActivity extends AppCompatActivity {
-
-    private static final String TAG = MainActivity.class.getSimpleName();
-
+    private static final String TAG = CustomProgressActivity.class.getSimpleName();
     @BindView(R.id.recycler)
     RecyclerView recycler;
     @BindView(R.id.flowLayout)
@@ -31,7 +27,7 @@ public class ContentActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_content_example);
+        setContentView(R.layout.activity_custom_progress);
         ButterKnife.bind(this);
 
         flowLayout.setConnectivityAware(true);

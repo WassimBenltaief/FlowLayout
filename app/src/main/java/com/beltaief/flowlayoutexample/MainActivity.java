@@ -20,8 +20,12 @@ public class MainActivity extends AppCompatActivity {
     Button emptyExample;
     @BindView(R.id.custom_empty_example)
     Button customEmptyExample;
-    @BindView(R.id.custom_connectivity)
-    Button customConnectivity;
+    @BindView(R.id.custom_connectivity_text_color)
+    Button customConnectivityTextColor;
+    @BindView(R.id.custom_connectivity_layout)
+    Button customConnectivityLayout;
+    @BindView(R.id.custom_progress)
+    Button customProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +35,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick({R.id.list_content_example,
-            R.id.custom_connectivity,
+            R.id.custom_connectivity_text_color,
+            R.id.custom_connectivity_layout,
             R.id.empty_example,
-            R.id.custom_empty_example
+            R.id.custom_empty_example,
+            R.id.custom_progress
             })
     public void onClick(View view) {
         Intent intent = null;
@@ -44,11 +50,17 @@ public class MainActivity extends AppCompatActivity {
             case R.id.empty_example:
                 intent = new Intent(this, EmptyActivity.class);
                 break;
-            case R.id.custom_connectivity:
+            case R.id.custom_connectivity_text_color:
                 intent = new Intent(this, CustomConnectivityColorActivity.class);
+                break;
+            case R.id.custom_connectivity_layout:
+                intent = new Intent(this, CustomConnectivityLayoutActivity.class);
                 break;
             case R.id.custom_empty_example:
                 intent = new Intent(this, CustomEmptyActivity.class);
+                break;
+            case R.id.custom_progress:
+                intent = new Intent(this, CustomProgressActivity.class);
                 break;
         }
         startActivity(intent);

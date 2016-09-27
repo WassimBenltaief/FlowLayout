@@ -19,12 +19,6 @@
             android:id="@+id/list_content_example" />
 
         <Button
-            android:text="Custom connectivity colors Example"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/custom_connectivity" />
-
-        <Button
             android:text="Empty Example"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -35,5 +29,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/custom_empty_example" />
+
+        <Button
+            android:text="Custom connectivity colors/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/custom_connectivity_text_color" />
+
+        <Button
+            android:text="Custom connectivity layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/custom_connectivity_layout" />
+
+        <Button
+            android:text="Custom progress layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/custom_progress" />
     </LinearLayout>
 </ScrollView>

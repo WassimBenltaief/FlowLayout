@@ -5,7 +5,7 @@
     android:id="@+id/reveLayout"
     app:isConnectivityAware="true"
     app:emptyText="@string/emptyText"
-    app:emptyTextColor="@color/colorAccent"
+    app:emptyTextColor="@color/colorPrimaryDark"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="EmptyActivity">
