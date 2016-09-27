@@ -22,7 +22,7 @@ FlowLayout do all of this for you with a very few code in a customized way.
 #Download
 
 ```groovy
-compile 'com.beltaief.flowlayout:flowlayout:0.1.1'
+compile 'com.beltaief.flowlayout:flowlayout:0.2.0'
 ```
 
 #How
@@ -101,6 +101,7 @@ And the view will be able to notify whenever the status of the internet connecti
 FlowLayout comes with several attributes to help customizing the connectivity view.
 Add attributes to your xml to apply customization :
 
+to customize color and/or  text in the default connectivity view
 ```xml
 app:isConnectivityAware="true" // true, false
 app:connectedText="@string/connectedTextStringResource" // text to show when connected
@@ -109,7 +110,12 @@ app:connectedBackground="@color/connectedBackgroundColorResource" // background 
 app:disconnectedText="@string/disconnectedTextStringResource" // text to show when disconnected
 app:disconnectedTextColor="@color/disconnectedTextColorResource" // text color
 app:disconnectedBackground="@color/disconnectedBackgroundColorResource" // background color
-app:emptyLayout="@layout/emptyLayoutReference" // custom empty view layout
+```
+
+or i you want to provide your own layout content :
+```xml
+app:connectedlayout="@layout/custom_connected_layout"
+app:disconnectedlayout="@layout/custom_disconnected_layout"
 ```
 
 ### Example :
@@ -191,6 +197,13 @@ flowLayout.setEmptyLayout(R.layout.layout_empty);
 ### Screenshot
 ![](https://github.com/WassimBenltaief/FlowLayout/blob/master/images/custom_empty.gif)
 
+# Customize Progress bar :
+
+if you want to provide your own progress view :
+
+```xml
+app:progressLayout="@layout/custom_progress"
+```
 
 # PR
 Open.
