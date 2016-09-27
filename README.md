@@ -211,8 +211,8 @@ Open.
 
 # TODOS
 
-- add customization to progress-bar
-- add error view handling
+- <del>add customization to progress-bar</del> Done
+- add error view
 - any other idea is welcome
 
 #Licence
