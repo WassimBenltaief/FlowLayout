@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.TranslateAnimation;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.beltaief.flowlayout.util.ColorUtil;
@@ -30,7 +30,7 @@ import com.beltaief.flowlayout.util.NetworkUtil;
  * The network connectivity view text, textColor and background color can be overridden usnig the
  * appropriates methods or via attributes in Xml.
  */
-public class FlowLayout extends RelativeLayout implements ConnectivityListener {
+public class FlowLayout extends FrameLayout implements ConnectivityListener {
 
     private boolean isConnected = false;
     private boolean mConnectivityAware = false;
@@ -39,14 +39,13 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
     private int mConnectedText = R.string.text_connected;
     private int mConnectedTextColor = R.color.connectivity_color;
     private int mConnectedBackground = R.color.connected_color;
+    private int mConnectedLayout = 0;
 
     // disconnected
-
     private int mDisconnectedText = R.string.text_disconnected;
     private int mDisconnectedTextColor = R.color.connectivity_color;
-
     private int mDisconnectedBackground = R.color.disconnected_color;
-
+    private int mDisconnectedLayout = 0;
     // error
     private int mErrorText = R.string.text_error;
 
@@ -55,16 +54,17 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
     private int mEmptyText = R.string.text_empty;
     private int mEmptyTextColor = R.color.text_empty_color;
 
-    // refresh
-    private int mProgressStyle = R.style.progress_bar;
+    // progress
+    private int mProgressLayout = R.layout.layout_progress;
 
     private Context mContext;
-    private RelativeLayout contentView;
-    private RelativeLayout emptyView;
+    private FrameLayout contentView;
+    private FrameLayout emptyView;
+    private FrameLayout progressView;
+    private FrameLayout connectivityView;
+
     private TextView textEmpty;
-    private RelativeLayout connectivityView;
     private TextView connectivityText;
-    private RelativeLayout progressView;
 
     private NetworkReceiver mReceiver;
 
@@ -101,7 +101,8 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
 
     /**
      * Init view
-     * @param attrs use attributes to build the view
+     *
+     * @param attrs    use attributes to build the view
      * @param defStyle
      */
     private void init(AttributeSet attrs, int defStyle) {
@@ -114,11 +115,13 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
             mConnectedText = a.getResourceId(R.styleable.FlowLayout_connectedText, mConnectedText);
             mConnectedTextColor = a.getResourceId(R.styleable.FlowLayout_connectedTextColor, mConnectedTextColor);
             mConnectedBackground = a.getResourceId(R.styleable.FlowLayout_connectedBackground, mConnectedBackground);
+            mConnectedLayout = a.getResourceId(R.styleable.FlowLayout_connectedlayout, mConnectedLayout);
 
             // disconnected
             mDisconnectedText = a.getResourceId(R.styleable.FlowLayout_disconnectedText, mDisconnectedText);
             mDisconnectedTextColor = a.getResourceId(R.styleable.FlowLayout_disconnectedTextColor, mDisconnectedTextColor);
             mDisconnectedBackground = a.getResourceId(R.styleable.FlowLayout_disconnectedBackground, mDisconnectedBackground);
+            mDisconnectedLayout = a.getResourceId(R.styleable.FlowLayout_disconnectedlayout, mDisconnectedLayout);
 
             // error
             mErrorText = a.getResourceId(R.styleable.FlowLayout_errorText, mErrorText);
@@ -127,6 +130,9 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
             mEmptyLayout = a.getResourceId(R.styleable.FlowLayout_emptyLayout, mEmptyLayout);
             mEmptyText = a.getResourceId(R.styleable.FlowLayout_emptyText, mEmptyText);
             mEmptyTextColor = a.getResourceId(R.styleable.FlowLayout_emptyTextColor, mEmptyTextColor);
+
+            // progress
+            mProgressLayout = a.getResourceId(R.styleable.FlowLayout_progressLayout, mProgressLayout);
 
         } finally {
             a.recycle();
@@ -141,19 +147,13 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
         // initialize connectivity status one time
         isConnected = NetworkUtil.getConnectivityStatus(mContext);
         // inflate view
-        LayoutInflater.from(mContext).inflate(R.layout.reve_layout, this);
+        LayoutInflater.from(mContext).inflate(R.layout.layout_flow, this);
 
-        contentView = (RelativeLayout) findViewById(R.id.content);
+        contentView = (FrameLayout) findViewById(R.id.content_view);
+        emptyView = (FrameLayout) findViewById(R.id.empty_view);
+        progressView = (FrameLayout) findViewById(R.id.progress_view);
+        connectivityView = (FrameLayout) findViewById(R.id.connectivity_view);
 
-        emptyView = (RelativeLayout) findViewById(R.id.emptyView);
-        textEmpty = (TextView) findViewById(R.id.text_empty);
-
-        connectivityView = (RelativeLayout) findViewById(R.id.connectivity);
-        connectivityText = (TextView) findViewById(R.id.connectivity_text);
-
-        progressView = (RelativeLayout) findViewById(R.id.progress_view);
-
-        initConnectivity();
         inflateLayouts();
     }
 
@@ -163,13 +163,56 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
      */
     private void inflateLayouts() {
         inflateEmptyView();
-        inflateEmptyText();
-        inflateEmptyTextColor();
+        inflateProgressView();
         if (mConnectivityAware) {
+            inflateConnectivityView();
+            initConnectivity();
+        }
+    }
+
+    private void inflateProgressView() {
+        // inflate view
+        progressView.removeAllViewsInLayout();
+        LayoutInflater.from(mContext).inflate(mProgressLayout, progressView);
+    }
+
+    private void inflateConnectivityView() {
+        connectivityView.removeAllViewsInLayout();
+        LayoutInflater.from(mContext).inflate(R.layout.layout_connectivity, connectivityView);
+
+        if (!isConnectivityLayoutOverridden()) {
+            connectivityText = (TextView) connectivityView.findViewById(R.id.connectivity_text);
+            // default view but may be different text, color, background
             inflateConnectedText();
             inflateConnectedTextColor();
             inflateConnectedBackground();
         }
+    }
+
+    /**
+     * Verify if both disconnected and connected layout have been overridden,
+     * otherwise throw an error
+     */
+    private void verifyOverrideRulesForConnectivity() {
+        if((mConnectedLayout != 0 && mDisconnectedLayout == 0)){
+            throw new RuntimeException("Error inflating custom connectivity layout. " +
+                    "Have you forgot to override the disconnected layout ?");
+        }
+
+        if((mConnectedLayout == 0 && mDisconnectedLayout != 0)){
+            throw new RuntimeException("Error inflating custom connectivity layout. " +
+                    "Have you forgot to override the connected layout ?");
+        }
+    }
+
+    /**
+     * check if the connectivity view was overridden by a custom view via xml or programmatically
+     *
+     * @return true if overridden
+     */
+    private boolean isConnectivityLayoutOverridden() {
+        verifyOverrideRulesForConnectivity();
+        return mConnectedLayout != 0 && mDisconnectedLayout != 0;
     }
 
     /**
@@ -232,11 +275,18 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
     /**
      * Set a custom empty view, this can be done via XML or programmatically
      * using setEmptyLayout(int layoutId)
+     * If not custom empty view is assigned, the default view will be inflated
      */
     private void inflateEmptyView() {
-        if (mEmptyLayout != R.layout.layout_empty) {
-            emptyView.removeAllViewsInLayout();
-            LayoutInflater.from(mContext).inflate(mEmptyLayout, emptyView);
+        // inflate view
+        emptyView.removeAllViewsInLayout();
+        LayoutInflater.from(mContext).inflate(mEmptyLayout, emptyView);
+
+        if (mEmptyLayout == R.layout.layout_empty) {
+            // default view but maybe different text, colors
+            textEmpty = (TextView) emptyView.findViewById(R.id.text_empty);
+            inflateEmptyText();
+            inflateEmptyTextColor();
         }
     }
 
@@ -245,11 +295,12 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
      * if yes, start a broadcast receiver to get udpates.
      */
     private void initConnectivity() {
-        if (!mConnectivityAware) {
-            connectivityView.setVisibility(GONE);
-            return;
+        if (!isConnectivityLayoutOverridden()) {
+            if (connectivityText == null) {
+                connectivityText = (TextView) connectivityView.findViewById(R.id.connectivity_text);
+            }
         }
-        if (mConnectivityAware && mReceiver == null) {
+        if (mReceiver == null) {
             // register broadcast receiver
             mReceiver = new NetworkReceiver(this);
             mContext.registerReceiver(mReceiver,
@@ -271,6 +322,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
     /**
      * Add the main content of the RelativeLayout custom view to the subView contentView.
      * This is the main content that will contains the childs of FlowLayout.
+     *
      * @param child
      * @param index
      * @param params
@@ -287,15 +339,20 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
 
     /**
      * set connectivity aware programmatically
+     *
      * @param aware
      */
     public void setConnectivityAware(boolean aware) {
         mConnectivityAware = aware;
-        initConnectivity();
+        if (mConnectivityAware) {
+            inflateConnectivityView();
+            initConnectivity();
+        }
     }
 
     /**
      * Set the text to appear on the connectivity view when phone turn connected.
+     *
      * @param mConnectedText
      */
     public void setConnectedText(int mConnectedText) {
@@ -305,6 +362,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
 
     /**
      * Set the the background color of the disconnected view
+     *
      * @param mDisconnectedBackground
      */
     public void setDisconnectedBackground(int mDisconnectedBackground) {
@@ -313,6 +371,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
 
     /**
      * Set the the background color of the connected view
+     *
      * @param mConnectedBackground
      */
     public void setConnectedBackground(int mConnectedBackground) {
@@ -321,6 +380,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
 
     /**
      * Set the text color to appear on the connectivity view when phone turn connected.
+     *
      * @param mConnectedTextColor
      */
     public void setConnectedTextColor(int mConnectedTextColor) {
@@ -329,6 +389,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
 
     /**
      * Set the text to appear on the connectivity view when phone turn disconnected.
+     *
      * @param mDisconnectedText
      */
     public void setDisconnectedText(int mDisconnectedText) {
@@ -338,6 +399,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
 
     /**
      * Set the text color to appear on the connectivity view when phone turn disconnected.
+     *
      * @param mDisconnectedTextColor an id representing the color resource.
      */
     public void setDisconnectedTextColor(int mDisconnectedTextColor) {
@@ -346,6 +408,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
 
     /**
      * set a custom empty view programmatically
+     *
      * @param mEmptyLayout an id representing the layout resource.
      */
     public void setEmptyLayout(int mEmptyLayout) {
@@ -355,6 +418,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
 
     /**
      * set the empty text to appear in the empty view
+     *
      * @param mEmptyText an id representing the string resource.
      */
     public void setEmptyText(int mEmptyText) {
@@ -364,6 +428,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
 
     /**
      * set the text color to display in the empty view
+     *
      * @param mEmptyTextColor an id representing the color resource.
      */
     public void setEmptyTextColor(int mEmptyTextColor) {
@@ -380,6 +445,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
 
     /**
      * the callback called by the broadcast receiver when a connectivity status change is detected
+     *
      * @param status
      */
     @Override
@@ -394,17 +460,55 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
     private void inflateConnectivity() {
         if (isConnected) {
             if (connectivityView.getVisibility() == VISIBLE) {
-                showConnected();
+                if (!isConnectivityLayoutOverridden()) {
+                    showConnected();
+                } else {
+                    showCustomConnected();
+                }
             }
         } else {
-            showDisconnected();
+            if (!isConnectivityLayoutOverridden()) {
+                showDisconnected();
+            } else {
+                showCustomDisonnected();
+            }
         }
+    }
+
+    private void showCustomDisonnected() {
+        connectivityView.removeAllViewsInLayout();
+        LayoutInflater.from(mContext).inflate(mDisconnectedLayout, connectivityView);
+        if (connectivityView.getVisibility() == GONE) {
+            connectivityView.setVisibility(View.VISIBLE);
+            TranslateAnimation animate = new TranslateAnimation(0, 0, -connectivityView.getHeight(), 0);
+            animate.setDuration(500);
+            animate.setFillAfter(true);
+            connectivityView.startAnimation(animate);
+        }
+    }
+
+    private void showCustomConnected() {
+        connectivityView.removeAllViewsInLayout();
+        LayoutInflater.from(mContext).inflate(mConnectedLayout, connectivityView);
+
+        connectivityView.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (isConnected) {
+                    TranslateAnimation animate = new TranslateAnimation(0, 0, 0, -connectivityView.getHeight());
+                    animate.setDuration(200);
+                    connectivityView.startAnimation(animate);
+                    connectivityView.setVisibility(View.GONE);
+                }
+            }
+        }, 2000);
     }
 
     /**
      * show connectivity view in disconnected mode.
      */
     private void showDisconnected() {
+
         connectivityView.setBackgroundColor(
                 ColorUtil.getColorWrapper(mContext, mDisconnectedBackground));
         connectivityText.setTextColor(
@@ -430,7 +534,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
                 ColorUtil.getColorWrapper(mContext, mConnectedTextColor));
         connectivityText.setText(getResources().getString(mConnectedText));
 
-        connectivityText.postDelayed(new Runnable() {
+        connectivityView.postDelayed(new Runnable() {
             @Override
             public void run() {
                 if (isConnected) {
@@ -447,15 +551,14 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
      * set the mode of the custom view.
      * This is called usually from the activity/fragment to change the status of the view
      * Example:
-     *  // before loading data :
-     *  flowLayout.setMode(FlowLayout.Mode.PROGRESS);
-     *
-     *  // if data is loaded correctly and is not empty
-     *  flowLayout.setMode(FlowLayout.Mode.CONTENT);
-     *
-     *  // otherwise
-     *  flowLayout.setMode(FlowLayout.Mode.EMPTY);
-     *
+     * // before loading data :
+     * flowLayout.setMode(FlowLayout.Mode.PROGRESS);
+     * <p>
+     * // if data is loaded correctly and is not empty
+     * flowLayout.setMode(FlowLayout.Mode.CONTENT);
+     * <p>
+     * // otherwise
+     * flowLayout.setMode(FlowLayout.Mode.EMPTY);
      */
     public void setMode(MODE mode) {
         switch (mode) {
@@ -479,6 +582,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
 
     /**
      * Set the content view visibility
+     *
      * @param visibility
      */
     private void setContent(int visibility) {
@@ -487,6 +591,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
 
     /**
      * Set the empty view visibility
+     *
      * @param visibility
      */
     private void setEmpty(int visibility) {
@@ -495,6 +600,7 @@ public class FlowLayout extends RelativeLayout implements ConnectivityListener {
 
     /**
      * Set the progress view visibility
+     *
      * @param visibility
      */
     private void setProgress(int visibility) {

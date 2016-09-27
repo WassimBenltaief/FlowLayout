@@ -3,13 +3,13 @@ apply plugin: 'com.github.dcendents.android-maven'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.2"
 
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 2
-        versionName "0.1.1"
+        versionCode 3
+        versionName "0.2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -39,7 +39,7 @@ ext {
     gitUrl = 'https://github.com/WassimBenltaief/FlowLayout.git'
     githubRepository= 'WassimBenltaief/FlowLayout'
 
-    libraryVersion = '0.1.1'
+    libraryVersion = '0.2.0'
 
     developerId = 'wassimbenltaief'
     developerName = 'Wassim Beltaief'

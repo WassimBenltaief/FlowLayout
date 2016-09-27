@@ -7,16 +7,20 @@
         <attr name="connectedText" format="reference" />
         <attr name="connectedTextColor" format="reference" />
         <attr name="connectedBackground" format="reference" />
+        <attr name="connectedlayout" format="reference" />
 
         <attr name="disconnectedText" format="reference" />
         <attr name="disconnectedTextColor" format="reference" />
         <attr name="disconnectedBackground" format="reference" />
+        <attr name="disconnectedlayout" format="reference" />
 
         <attr name="errorText" format="reference" />
 
         <attr name="emptyLayout" format="reference" />
         <attr name="emptyText" format="reference" />
         <attr name="emptyTextColor" format="reference" />
+
+        <attr name="progressLayout" format="reference" />
 
     </declare-styleable>
 </resources>
