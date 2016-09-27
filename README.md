@@ -28,7 +28,7 @@ compile 'com.beltaief.flowlayout:flowlayout:0.2.0'
 
 #How
 
-FlowLayout extends a RelativeLayout. So add it to your view as a regular RelativeLayout :
+FlowLayout extends a FrameLayout. So add it to your view as a regular View and compose inside it :
 
 in your ```activity_layout.xml``` :
 
