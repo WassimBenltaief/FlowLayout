@@ -5,10 +5,11 @@ A custom Layout able to display content, empty view, progress bar and network co
 2. [Download](https://github.com/WassimBenltaief/FlowLayout#download)
 3. [How](https://github.com/WassimBenltaief/FlowLayout#how)
 4. [Connectivity Awareness](https://github.com/WassimBenltaief/FlowLayout#connectivity-awareness)
-5. [Customize connectivity view](https://github.com/WassimBenltaief/FlowLayout#customize-connectivity)
+5. [Customize connectivity view (colors / text / layout)](https://github.com/WassimBenltaief/FlowLayout#customize-connectivity)
 6. [Customize empty view](https://github.com/WassimBenltaief/FlowLayout#customize-empty-view)
-7. [PR](https://github.com/WassimBenltaief/FlowLayout#pr)
-8. [TODOS](https://github.com/WassimBenltaief/FlowLayout#todos)
+7. [Customize progress view](https://github.com/WassimBenltaief/FlowLayout#customize-progress-bar-)
+8. [PR](https://github.com/WassimBenltaief/FlowLayout#pr)
+9. [TODOS](https://github.com/WassimBenltaief/FlowLayout#todos)
 
 #Why this layout
 A very common flow of an android view is :
