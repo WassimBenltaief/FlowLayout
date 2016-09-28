@@ -1,3 +1,6 @@
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-FlowLayout-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/4407)
+
 # FlowLayout
 A custom Layout able to display content, empty view, progress bar and network connectivity status.
 
