@@ -10,6 +10,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.view.animation.TranslateAnimation;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -563,21 +564,31 @@ public class FlowLayout extends FrameLayout implements ConnectivityListener {
     public void setMode(MODE mode) {
         switch (mode) {
             case PROGRESS:
-                setProgress(VISIBLE);
+                fadeIn(progressView, true).setProgress(VISIBLE);
                 setEmpty(GONE);
                 setContent(GONE);
                 break;
             case EMPTY:
                 setProgress(GONE);
-                setEmpty(VISIBLE);
+                fadeIn(emptyView, true).setEmpty(VISIBLE);
                 setContent(GONE);
                 break;
             case CONTENT:
                 setProgress(GONE);
                 setEmpty(GONE);
-                setContent(VISIBLE);
+                fadeIn(contentView, true).setContent(VISIBLE);
                 break;
         }
+    }
+
+    private FlowLayout fadeIn(final View view, final boolean animate) {
+        if (view != null)
+            if (animate)
+                view.startAnimation(AnimationUtils.loadAnimation(getContext(),
+                        android.R.anim.fade_in));
+            else
+                view.clearAnimation();
+        return this;
     }
 
     /**
