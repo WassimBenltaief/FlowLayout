@@ -47,5 +47,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/custom_progress" />
+
+        <Button
+            android:text="Experiment activity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/experiment_activity" />
+
     </LinearLayout>
 </ScrollView>

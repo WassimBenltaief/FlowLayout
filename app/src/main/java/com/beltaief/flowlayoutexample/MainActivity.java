@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
             R.id.custom_connectivity_layout,
             R.id.empty_example,
             R.id.custom_empty_example,
-            R.id.custom_progress
+            R.id.custom_progress,
+            R.id.experiment_activity
             })
     public void onClick(View view) {
         Intent intent = null;
@@ -61,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.custom_progress:
                 intent = new Intent(this, CustomProgressActivity.class);
+                break;
+            case R.id.experiment_activity:
+                intent = new Intent(this, ExperimentActivity.class);
                 break;
         }
         startActivity(intent);
