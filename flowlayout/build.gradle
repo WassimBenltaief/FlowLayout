@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 3
-        versionName "0.2.0"
+        versionCode 4
+        versionName "0.3.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -39,7 +39,7 @@ ext {
     gitUrl = 'https://github.com/WassimBenltaief/FlowLayout.git'
     githubRepository= 'WassimBenltaief/FlowLayout'
 
-    libraryVersion = '0.2.0'
+    libraryVersion = '0.3.0'
 
     developerId = 'wassimbenltaief'
     developerName = 'Wassim Beltaief'

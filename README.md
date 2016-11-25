@@ -26,7 +26,7 @@ FlowLayout do all of this for you with a very few code in a customized way.
 #Download
 
 ```groovy
-compile 'com.beltaief.flowlayout:flowlayout:0.2.0'
+compile 'com.beltaief.flowlayout:flowlayout:0.3.0'
 ```
 
 #How
