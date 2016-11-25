@@ -1,3 +1,6 @@
+
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-FlowLayout-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/4407)
+
 # FlowLayout
 A custom Layout able to display content, empty view, progress bar and network connectivity status.
 
@@ -5,10 +8,11 @@ A custom Layout able to display content, empty view, progress bar and network co
 2. [Download](https://github.com/WassimBenltaief/FlowLayout#download)
 3. [How](https://github.com/WassimBenltaief/FlowLayout#how)
 4. [Connectivity Awareness](https://github.com/WassimBenltaief/FlowLayout#connectivity-awareness)
-5. [Customize connectivity view](https://github.com/WassimBenltaief/FlowLayout#customize-connectivity)
+5. [Customize connectivity view (colors / text / layout)](https://github.com/WassimBenltaief/FlowLayout#customize-connectivity)
 6. [Customize empty view](https://github.com/WassimBenltaief/FlowLayout#customize-empty-view)
-7. [PR](https://github.com/WassimBenltaief/FlowLayout#pr)
-8. [TODOS](https://github.com/WassimBenltaief/FlowLayout#todos)
+7. [Customize progress view](https://github.com/WassimBenltaief/FlowLayout#customize-progress-bar-)
+8. [PR](https://github.com/WassimBenltaief/FlowLayout#pr)
+9. [TODOS](https://github.com/WassimBenltaief/FlowLayout#todos)
 
 #Why this layout
 A very common flow of an android view is :
@@ -22,12 +26,12 @@ FlowLayout do all of this for you with a very few code in a customized way.
 #Download
 
 ```groovy
-compile 'com.beltaief.flowlayout:flowlayout:0.1.1'
+compile 'com.beltaief.flowlayout:flowlayout:0.2.0'
 ```
 
 #How
 
-FlowLayout extends a RelativeLayout. So add it to your view as a regular RelativeLayout :
+FlowLayout extends a FrameLayout. So add it to your view as a regular View and compose inside it :
 
 in your ```activity_layout.xml``` :
 
@@ -101,6 +105,7 @@ And the view will be able to notify whenever the status of the internet connecti
 FlowLayout comes with several attributes to help customizing the connectivity view.
 Add attributes to your xml to apply customization :
 
+to customize color and/or  text in the default connectivity view
 ```xml
 app:isConnectivityAware="true" // true, false
 app:connectedText="@string/connectedTextStringResource" // text to show when connected
@@ -109,7 +114,12 @@ app:connectedBackground="@color/connectedBackgroundColorResource" // background 
 app:disconnectedText="@string/disconnectedTextStringResource" // text to show when disconnected
 app:disconnectedTextColor="@color/disconnectedTextColorResource" // text color
 app:disconnectedBackground="@color/disconnectedBackgroundColorResource" // background color
-app:emptyLayout="@layout/emptyLayoutReference" // custom empty view layout
+```
+
+or i you want to provide your own layout content :
+```xml
+app:connectedlayout="@layout/custom_connected_layout"
+app:disconnectedlayout="@layout/custom_disconnected_layout"
 ```
 
 ### Example :
@@ -191,14 +201,21 @@ flowLayout.setEmptyLayout(R.layout.layout_empty);
 ### Screenshot
 ![](https://github.com/WassimBenltaief/FlowLayout/blob/master/images/custom_empty.gif)
 
+# Customize Progress bar :
+
+if you want to provide your own progress view :
+
+```xml
+app:progressLayout="@layout/custom_progress"
+```
 
 # PR
 Open.
 
 # TODOS
 
-- add customization to progress-bar
-- add error view handling
+- <del>add customization to progress-bar</del> Done
+- add error view
 - any other idea is welcome
 
 #Licence
