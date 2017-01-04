@@ -268,7 +268,7 @@ public class FlowLayout extends FrameLayout implements ConnectivityListener {
                         "You already overridden the entire emptyLayout, no need to specify " +
                         "custom color or custom text message");
             } else {
-                textEmpty.setText(getResources().getString(R.string.text_empty));
+                textEmpty.setText(mEmptyText);
             }
         }
     }
