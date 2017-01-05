@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:isConnectivityAware="true"
-    app:connectedlayout="@layout/custom_connected_layout"
-    app:disconnectedlayout="@layout/custom_disconnected_layout"
+    app:connectedLayout="@layout/custom_connected_layout"
+    app:disconnectedLayout="@layout/custom_disconnected_layout"
     tools:context="CustomConnectivityColorActivity">
 
     <android.support.v7.widget.RecyclerView

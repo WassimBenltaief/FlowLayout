@@ -31,7 +31,7 @@ import com.beltaief.flowlayout.util.NetworkUtil;
  * The network connectivity view text, textColor and background color can be overridden usnig the
  * appropriates methods or via attributes in Xml.
  */
-public class FlowLayout extends FrameLayout implements ConnectivityListener {
+public class FlowLayout extends FrameLayout implements ConnectivityListener, ViewMode {
 
     private boolean isConnected = false;
     private boolean mConnectivityAware = false;
@@ -63,17 +63,12 @@ public class FlowLayout extends FrameLayout implements ConnectivityListener {
     private FrameLayout emptyView;
     private FrameLayout progressView;
     private FrameLayout connectivityView;
+    private FrameLayout errorView;
 
     private TextView textEmpty;
     private TextView connectivityText;
 
     private NetworkReceiver mReceiver;
-
-    public enum MODE {
-        PROGRESS,
-        EMPTY,
-        CONTENT
-    }
 
     public FlowLayout(Context context) {
         super(context);
