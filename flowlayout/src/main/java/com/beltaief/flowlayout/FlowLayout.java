@@ -19,6 +19,7 @@ import com.beltaief.flowlayout.util.ColorUtil;
 import com.beltaief.flowlayout.util.ConnectivityListener;
 import com.beltaief.flowlayout.util.NetworkReceiver;
 import com.beltaief.flowlayout.util.NetworkUtil;
+import com.beltaief.flowlayout.util.ViewMode;
 
 /**
  * Created by wassim on 9/20/16.
@@ -47,8 +48,9 @@ public class FlowLayout extends FrameLayout implements ConnectivityListener, Vie
     private int mDisconnectedTextColor = R.color.connectivity_color;
     private int mDisconnectedBackground = R.color.disconnected_color;
     private int mDisconnectedLayout = 0;
+
     // error
-    private int mErrorText = R.string.text_error;
+    private int mErrorLayout = R.layout.layout_error;
 
     // empty
     private int mEmptyLayout = R.layout.layout_empty;
@@ -111,16 +113,16 @@ public class FlowLayout extends FrameLayout implements ConnectivityListener, Vie
             mConnectedText = a.getResourceId(R.styleable.FlowLayout_connectedText, mConnectedText);
             mConnectedTextColor = a.getResourceId(R.styleable.FlowLayout_connectedTextColor, mConnectedTextColor);
             mConnectedBackground = a.getResourceId(R.styleable.FlowLayout_connectedBackground, mConnectedBackground);
-            mConnectedLayout = a.getResourceId(R.styleable.FlowLayout_connectedlayout, mConnectedLayout);
+            mConnectedLayout = a.getResourceId(R.styleable.FlowLayout_connectedLayout, mConnectedLayout);
 
             // disconnected
             mDisconnectedText = a.getResourceId(R.styleable.FlowLayout_disconnectedText, mDisconnectedText);
             mDisconnectedTextColor = a.getResourceId(R.styleable.FlowLayout_disconnectedTextColor, mDisconnectedTextColor);
             mDisconnectedBackground = a.getResourceId(R.styleable.FlowLayout_disconnectedBackground, mDisconnectedBackground);
-            mDisconnectedLayout = a.getResourceId(R.styleable.FlowLayout_disconnectedlayout, mDisconnectedLayout);
+            mDisconnectedLayout = a.getResourceId(R.styleable.FlowLayout_disconnectedLayout, mDisconnectedLayout);
 
             // error
-            mErrorText = a.getResourceId(R.styleable.FlowLayout_errorText, mErrorText);
+            mErrorLayout = a.getResourceId(R.styleable.FlowLayout_errorLayout, mErrorLayout);
 
             // empty
             mEmptyLayout = a.getResourceId(R.styleable.FlowLayout_emptyLayout, mEmptyLayout);
@@ -149,6 +151,7 @@ public class FlowLayout extends FrameLayout implements ConnectivityListener, Vie
         emptyView = (FrameLayout) findViewById(R.id.empty_view);
         progressView = (FrameLayout) findViewById(R.id.progress_view);
         connectivityView = (FrameLayout) findViewById(R.id.connectivity_view);
+        errorView = (FrameLayout) findViewById(R.id.error_view);
 
         inflateLayouts();
     }
@@ -160,10 +163,16 @@ public class FlowLayout extends FrameLayout implements ConnectivityListener, Vie
     private void inflateLayouts() {
         inflateEmptyView();
         inflateProgressView();
+        inflateErrorView();
         if (mConnectivityAware) {
             inflateConnectivityView();
             initConnectivity();
         }
+    }
+
+    private void inflateErrorView() {
+        errorView.removeAllViewsInLayout();
+        LayoutInflater.from(mContext).inflate(mErrorLayout, errorView);
     }
 
     private void inflateProgressView() {
@@ -190,12 +199,12 @@ public class FlowLayout extends FrameLayout implements ConnectivityListener, Vie
      * otherwise throw an error
      */
     private void verifyOverrideRulesForConnectivity() {
-        if((mConnectedLayout != 0 && mDisconnectedLayout == 0)){
+        if ((mConnectedLayout != 0 && mDisconnectedLayout == 0)) {
             throw new RuntimeException("Error inflating custom connectivity layout. " +
                     "Have you forgot to override the disconnected layout ?");
         }
 
-        if((mConnectedLayout == 0 && mDisconnectedLayout != 0)){
+        if ((mConnectedLayout == 0 && mDisconnectedLayout != 0)) {
             throw new RuntimeException("Error inflating custom connectivity layout. " +
                     "Have you forgot to override the connected layout ?");
         }
@@ -556,22 +565,31 @@ public class FlowLayout extends FrameLayout implements ConnectivityListener, Vie
      * // otherwise
      * flowLayout.setMode(FlowLayout.Mode.EMPTY);
      */
-    public void setMode(MODE mode) {
+    public void setMode(@State int mode) {
         switch (mode) {
             case PROGRESS:
                 fadeIn(progressView, true).setProgress(VISIBLE);
                 setEmpty(GONE);
                 setContent(GONE);
+                setError(GONE);
                 break;
             case EMPTY:
                 setProgress(GONE);
                 fadeIn(emptyView, true).setEmpty(VISIBLE);
                 setContent(GONE);
+                setError(GONE);
                 break;
             case CONTENT:
                 setProgress(GONE);
                 setEmpty(GONE);
+                setError(GONE);
                 fadeIn(contentView, true).setContent(VISIBLE);
+                break;
+            case ERROR:
+                setProgress(GONE);
+                setEmpty(GONE);
+                setContent(GONE);
+                fadeIn(errorView, true).setError(VISIBLE);
                 break;
         }
     }
@@ -611,6 +629,15 @@ public class FlowLayout extends FrameLayout implements ConnectivityListener, Vie
      */
     private void setProgress(int visibility) {
         progressView.setVisibility(visibility);
+    }
+
+    /**
+     * Set the error view visibility
+     *
+     * @param visibility
+     */
+    private void setError(int visibility) {
+        errorView.setVisibility(visibility);
     }
 
 }

@@ -3,9 +3,12 @@ package com.beltaief.flowlayoutexample;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+
+import com.beltaief.flowlayout.FlowLayout;
+import com.beltaief.flowlayout.util.ViewMode;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import com.beltaief.flowlayout.FlowLayout;
 
 /**
  * Created by wassim on 10/10/16.
@@ -25,7 +28,7 @@ public class ExperimentActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         flowLayout.setConnectivityAware(true);
-        flowLayout.setMode(FlowLayout.MODE.PROGRESS);
+        flowLayout.setMode(ViewMode.PROGRESS);
 
         getData();
     }
@@ -45,6 +48,6 @@ public class ExperimentActivity extends AppCompatActivity {
     }
 
     private void showContent() {
-        flowLayout.setMode(FlowLayout.MODE.CONTENT);
+        flowLayout.setMode(ViewMode.ERROR);
     }
 }

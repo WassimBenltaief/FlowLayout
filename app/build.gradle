@@ -26,7 +26,7 @@ android {
 }
 
 dependencies {
-    compile 'com.beltaief.flowlayout:flowlayout:0.3.0'
+    compile project(':flowlayout')
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
     compile 'com.android.support:appcompat-v7:24.2.1'

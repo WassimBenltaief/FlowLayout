@@ -4,4 +4,11 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+
+    <TextView
+        android:text="An error occured !"
+        android:gravity="center|center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </LinearLayout>
