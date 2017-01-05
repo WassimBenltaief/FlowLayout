@@ -11,8 +11,9 @@ A custom Layout able to display content, empty view, progress bar and network co
 5. [Customize connectivity view (colors / text / layout)](https://github.com/WassimBenltaief/FlowLayout#customize-connectivity)
 6. [Customize empty view](https://github.com/WassimBenltaief/FlowLayout#customize-empty-view)
 7. [Customize progress view](https://github.com/WassimBenltaief/FlowLayout#customize-progress-bar-)
-8. [PR](https://github.com/WassimBenltaief/FlowLayout#pr)
-9. [TODOS](https://github.com/WassimBenltaief/FlowLayout#todos)
+8. [Customize error view](https://github.com/WassimBenltaief/FlowLayout#customize-error-view-)
+9. [PR](https://github.com/WassimBenltaief/FlowLayout#pr)
+10. [TODOS](https://github.com/WassimBenltaief/FlowLayout#todos)
 
 #Why this layout
 A very common flow of an android view is :
@@ -26,7 +27,7 @@ FlowLayout do all of this for you with a very few code in a customized way.
 #Download
 
 ```groovy
-compile 'com.beltaief.flowlayout:flowlayout:0.3.0'
+compile 'com.beltaief.flowlayout:flowlayout:0.4.0'
 ```
 
 #How
@@ -59,19 +60,23 @@ protected void onCreate(Bundle savedInstanceState) {
     FlowLayout flowLayout = (FlowLayout)findViewById(R.id.flow_layout);
     
     //set mode progress
-    flowLayout.setMode(FlowLayout.MODE.PROGRESS);
+    flowLayout.setMode(ViewMode.PROGRESS);
     
     // fetch data
     ...
     
     // assign result to the view
     if (data.isEmpty()) {
-      flowLayout.setMode(FlowLayout.MODE.EMPTY);
+      flowLayout.setMode(ViewMode.EMPTY);
     } else {
-      flowLayout.setMode(FlowLayout.MODE.CONTENT);
+      flowLayout.setMode(ViewMode.CONTENT);
       // show the data in the view
       ...
     }
+    
+    ... 
+    // or set error view
+    flowLayout.setMode(ViewMode.ERROR);
 }
 ```
 [content]: https://github.com/WassimBenltaief/FlowLayout/blob/master/images/content_loading.gif
@@ -118,8 +123,8 @@ app:disconnectedBackground="@color/disconnectedBackgroundColorResource" // backg
 
 or i you want to provide your own layout content :
 ```xml
-app:connectedlayout="@layout/custom_connected_layout"
-app:disconnectedlayout="@layout/custom_disconnected_layout"
+app:connectedLayout="@layout/custom_connected_layout"
+app:disconnectedLayout="@layout/custom_disconnected_layout"
 ```
 
 ### Example :
@@ -209,13 +214,24 @@ if you want to provide your own progress view :
 app:progressLayout="@layout/custom_progress"
 ```
 
+
+# Customize Error View :
+
+if you want to provide your own error view :
+
+```xml
+app:errorLayout="@layout/custom_error"
+```
+
 # PR
 Open.
 
 # TODOS
 
 - <del>add customization to progress-bar</del> Done
-- add error view
+- <del>add error view</del> Done
+- <del>use @IntDef for setting view modes</del> Done
+- Use ViewStub
 - any other idea is welcome
 
 #Licence
