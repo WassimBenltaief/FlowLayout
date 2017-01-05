@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.beltaief.flowlayout.FlowLayout;
+import com.beltaief.flowlayout.util.ViewMode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class EmptyActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         flowLayout.setConnectivityAware(true);
-        flowLayout.setMode(FlowLayout.MODE.PROGRESS);
+        flowLayout.setMode(ViewMode.PROGRESS);
 
         recycler.setLayoutManager(new LinearLayoutManager(this));
         recycler.setAdapter(mAdapter);
@@ -55,9 +56,9 @@ public class EmptyActivity extends AppCompatActivity {
 
     private void setData(List<String> items) {
         if(items.size() > 0) {
-            flowLayout.setMode(FlowLayout.MODE.CONTENT);
+            flowLayout.setMode(ViewMode.CONTENT);
         } else {
-            flowLayout.setMode(FlowLayout.MODE.EMPTY);
+            flowLayout.setMode(ViewMode.EMPTY);
         }
         mAdapter.setData(items);
     }
